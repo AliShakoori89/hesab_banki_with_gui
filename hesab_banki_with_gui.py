@@ -9,6 +9,10 @@ def add_sheets(id_search,search_field):
         data[id_search]['supply']=data[id_search]['supply']+cus_sup
         with open('customer_list.json','w') as f:
             f.write(json.dumps(data))
+        root = Tk()
+        root.title("Notification")
+        root.geometry("300x50")
+        the_amount_of_curtains=Label(root,text="Successfully deposit").grid(row=0 , column=0)
 
 def sub_sheets(id_search,search_field):
     cus_sup=int(search_field.get())
@@ -18,6 +22,10 @@ def sub_sheets(id_search,search_field):
             data[id_search]['supply']=data[id_search]['supply']-cus_sup
             with open('customer_list.json','w') as f:
                 f.write(json.dumps(data))
+            root = Tk()
+            root.title("Notification")
+            root.geometry("300x50")
+            the_amount_of_curtains=Label(root,text="Successfully dump").grid(row=0 , column=0)
         else:
             root = Tk()
             root.title("error")
@@ -49,7 +57,7 @@ def search(x):
             the_amount_of_curtains=Label(root,text="This ID number not found!!!").grid(row=0 , column=0)
 
 
-def withraw(deposit_field_1):
+def delete_member(withdraw_field_1):
     id_search=withdraw_field_1.get()
     with open('customer_list.json') as f:
         data=json.load(f)
@@ -57,11 +65,25 @@ def withraw(deposit_field_1):
             data.pop(id_search)
             with open('customer_list.json','w') as f:
                 f.write(json.dumps(data))
+            root = Tk()
+            root.title("Notification")
+            root.geometry("300x50")
+            the_amount_of_curtains=Label(root,text="Successfully removed").grid(row=0 , column=0)
         else:
             root = Tk()
             root.title("error")
             root.geometry("300x50")
             the_amount_of_curtains=Label(root,text="This ID number not found!!!").grid(row=0 , column=0)
+
+def withdraw():
+    root = Tk()
+    root.title("search box")
+    root.geometry("400x100")
+    id_number_for_search=Label(root,text="ID number for withdraw: ").grid(row=0 , column=0)
+    withdraw_field_1 = Entry(root,bg='light gray',width=30,bd=2,selectborderwidth=5)
+    withdraw_field_1.grid(row=0,column=3)
+    Button(root, text='withdraw',command=lambda : delete_member(withdraw_field_1)).grid(row=2,column=0,sticky = W)
+    root.mainloop()
 
 def add():
     a=win_field_1.get()
@@ -82,6 +104,12 @@ def add():
         with open('customer_list.json','w') as f:
             f.write(json.dumps(feeds))
 
+    
+        root = Tk()
+        root.title("Notification")
+        root.geometry("300x50")
+        the_amount_of_curtains=Label(root,text="Successfully added!!!").grid(row=0 , column=0)
+
 def deposit():
     root = Tk()
     root.title("deposit box")
@@ -91,18 +119,6 @@ def deposit():
     deposit_field_1.grid(row=0,column=3)
     Button(root, text='search',command=lambda : search(deposit_field_1)).grid(row=2,column=0,sticky = W)
     root.mainloop()
-
-def withdraw():
-    root = Tk()
-    root.title("search box")
-    root.geometry("400x100")
-    id_number_for_search=Label(root,text="ID number for withdraw: ").grid(row=0 , column=0)
-    withdraw_field_1 = Entry(root,bg='light gray',width=30,bd=2,selectborderwidth=5)
-    withdraw_field_1.grid(row=0,column=3)
-    Button(root, text='withdraw',command=lambda : withraw(withdraw_field_1)).grid(row=2,column=0,sticky = W)
-    root.mainloop()
-
-
 
 def dump():
     root = Tk()
