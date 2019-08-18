@@ -129,14 +129,20 @@ def dump():
     dump_field_1.grid(row=0,column=3)
     Button(root, text='search',command=lambda : search(dump_field_1)).grid(row=2,column=0,sticky = W)
     root.mainloop()
-    
+
+def show():
+    root = Tk()
+    with open('customer_list.json', "r") as f:
+        Label(root, text=f.read()).pack()
+
+
 
 
 cus_specification={}
 all_cus_specification={}
 root = Tk()        
 root.title("Bank account")
-root.geometry("330x400")
+root.geometry("330x160")
 
 win_field_1 = Entry(root,bg='light gray',width=30,bd=2,selectborderwidth=5)
 win_field_1.grid(row=0 , column=3 )
@@ -172,8 +178,7 @@ Button(root, text='Add', command=add).place(x=2,y=120)
 Button(root, text='Deposit', command=deposit).place(x=40,y=120)
 Button(root, text='Withdraw', command=withdraw).place(x=95,y=120)
 Button(root, text='Dump', command=dump).place(x=161,y=120)
-
-
+Button(root, text='show list', width=15 , command=show).place(x=208,y=120)
 root.mainloop()
         
 
